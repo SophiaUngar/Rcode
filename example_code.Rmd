@@ -1,0 +1,26 @@
+---
+title: "Example _R_Code"
+author: "Sophia Ungar"
+date: "2023-02-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Extra functions we need
+```{r}
+library(tidyverse)
+```
+
+##Read in data
+```{r}
+data <- read.csv(example.csv)
+
+```
+
+##Summary
+```{r}
+summart(data)
+```
