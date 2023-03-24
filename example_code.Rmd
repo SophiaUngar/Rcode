@@ -27,7 +27,7 @@ data <- read.csv(example.csv)
 
 In R there are many ways to do the same thing. 
 
-##Summary
+##Summarize
 ```{r}
 summary(data)
 
