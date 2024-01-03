@@ -1,0 +1,142 @@
+---
+title: "How to Use R"
+author: "Sophia Ungar"
+date: "2023-02-21"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I'm not going to go into why use R, except that seems to be primarily for statistics. I'm not the best person to ask about R vs other stats languages vs Python. I also want to make this a useful reference guide, but not a complete teacher.
+
+
+## Other places to learn things
+Suggested by Josh Davidson:
+[R for Data Science](https://r4ds.hadley.nz/data-visualize)
+
+
+## Basic Formatting
+RMarkdown combines R code in chunks like this one: 
+```{r}
+
+```
+The three ticks and the {r} as seen above designate the things inside as things to be run. You can leave comments that start with a pound sign, #, that won't be evaluated.
+
+Outside of the chunks (sorry about the word, not my choice), text is formatted with markdown. 
+About Markdown: https://www.markdownguide.org/
+
+RMarkdown files can be knit to see the final form. Click on the ball of yarn/ Knit button above this. Or click the drop down arrow to choose whether to end up with a pdf, HTML, or Word document.
+
+
+## Basic Functions
+
+```{r}
+# Arithmetic
+2+3
+2-4
+8*9
+5/10
+4**10
+
+# Variable Assignment
+a <- 2
+b = 4
+
+# Print
+b
+5
+
+```
+
+
+##Extra functions we need
+If you haven't installed the packages first you will need to run  install.packages("<package>") in the terminal below or go to packages in the bottom right.
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+
+##Read in data
+```{r}
+#data <- read.csv(<filename>.csv) # getting data from a csv
+library(palmerpenguins)
+data <- penguins
+```
+We want to pull in data so the computer can look at it. I've commented out one way to get it from a csv. To use as an example, the palmerpenguins library has the penguins tibble. 
+
+One thing to think about is what kind of structure we want to put the data in. In R there are tables, data frames, tibbles, and more. Some functions work on all of them, but some only work on certain types.
+TODO: add recommendation on which structure to choose
+
+
+
+## Clean Up 
+
+Get a specific column
+```{r}
+flipper <- data$flipper_length_mm
+
+```
+
+
+Isolate or Remove columns
+```{r}
+# same data but only the flipper and bill length columns
+flipper_bill <- subset(data, select=c(flipper_length_mm, bill_length_mm))
+
+# same data but without the island and year columns
+no_island_year <- subset(data, select=-c(island, year))
+
+```
+
+
+TODO: add Remove rows with missing data
+TODO: add find and remove outliers
+
+
+##Summarize
+In R there are many ways to do the same thing. Below is one way to start looking at the data.
+
+```{r}
+summary(data)
+
+head(data) # see the first rows. 6 rows by default
+```
+
+
+
+##Basic Stats Functions
+```{r}
+mean( data$flipper_length_mm, na.rm=TRUE) # mean, ignoring missing values
+sd( flipper, na.rm=TRUE) # standard deviation, ignoring missing values
+
+```
+TODO: add confidence intervals
+
+t test
+```{r}
+
+```
+
+ANOVA
+
+
+##Simulate
+```{r}
+
+
+```
+
+
+##Visualize
+```{r}
+ggplot(data, aes(flipper_length_mm, bill_length_mm, color=sex)) +
+    geom_point()
+
+```
+
+

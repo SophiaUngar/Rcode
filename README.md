@@ -1,2 +1,2 @@
 # Rcode
-Repository for testing my Git/GitHub setup
+Repository for practicing and referencing code in R.
