@@ -1,17 +1,16 @@
 ---
-title: "How to Use R"
+title: "how_to_code_in_r.Rmd"
 author: "Sophia Ungar"
-date: "2023-02-21"
-output:
-  pdf_document: default
-  html_document: default
+date: "2024-01-03"
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-I'm not going to go into why use R, except that seems to be primarily for statistics. I'm not the best person to ask about R vs other stats languages vs Python. I also want to make this a useful reference guide, but not a complete teacher.
+
+I'm not going to go into why use R, except that it seems to be primarily for statistics. I'm not the best person to ask about R vs other stats languages vs Python. I also want to make this a useful reference guide, but not a complete teacher.
 
 
 ## Other places to learn things
@@ -53,7 +52,7 @@ b
 ```
 
 
-##Extra code we need
+## Extra code we need
 If you haven't installed the packages first you will need to run  install.packages("<package>") in the terminal below or go to packages in the bottom right.
 ```{r}
 library(tidyverse)
@@ -61,7 +60,7 @@ library(ggplot2)
 ```
 
 
-##Read in data
+## Read in data
 ```{r}
 #data <- read.csv(<filename>.csv) # getting data from a csv
 library(palmerpenguins)
@@ -98,8 +97,8 @@ TODO: add find and remove outliers
 TODO: take the log of everything?
 
 
-##Summarize
-In R there are many ways to do the same thing. Below is one way to start looking at the data.
+## Summarize
+In R there are many ways to do the same thing, in part because it is open source so many different people write the packages that provide a lot of the functions. Below is one way to start looking at the data.
 
 ```{r}
 summary(data)
@@ -108,7 +107,7 @@ head(data) # see the first rows. 6 rows by default
 ```
 
 
-##Basic Stats Functions
+## Basic Stats Functions
 ```{r}
 mean( data$flipper_length_mm, na.rm=TRUE) # mean, ignoring missing values
 sd( flipper, na.rm=TRUE) # standard deviation, ignoring missing values
@@ -134,7 +133,7 @@ summary( aov(bill_length_mm ~ year, data))
 ```
 
 
-##Visualize
+## Visualize
 
 This example shows flipper length by bill length. The color is the sex of the bird.
 ```{r}
@@ -144,11 +143,9 @@ ggplot(data, aes(flipper_length_mm, bill_length_mm, color=sex)) +
 ```
 
 
-##Simulate
+## Simulate
 ```{r}
 
 
 ```
-
-
 
