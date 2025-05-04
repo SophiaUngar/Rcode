@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-I'm not going to go into why use R, except that it seems to be primarily for statistics. I'm not the best person to ask about R vs other stats languages vs Python. I also want to make this a useful reference guide, but not a complete teacher.
+I'm not going to go into why use R, except that it seems to be primarily for statistics. I'm not the best person to ask about R vs other stats languages vs Python. I also want to make this a useful reference guide (mostly for myself), but not a complete teacher.
 
 
 ## Other places to learn things
@@ -56,7 +56,7 @@ b
 If you haven't installed the packages first you will need to run  install.packages("<package>") in the terminal below or go to packages in the bottom right.
 ```{r}
 library(tidyverse)
-library(ggplot2)
+library(ggplot2) # for the visualizations
 ```
 
 
@@ -126,6 +126,13 @@ t.test(bill_length_mm ~ species, chinstrap_adelie)
 
 ```
 
+linear regression
+```{r}
+lm(bill_length_mm ~ body_mass_g, data = data)
+
+```
+
+
 ANOVA
 ```{r}
 summary( aov(bill_length_mm ~ year, data))
@@ -137,15 +144,42 @@ summary( aov(bill_length_mm ~ year, data))
 
 This example shows flipper length by bill length. The color is the sex of the bird.
 ```{r}
-ggplot(data, aes(flipper_length_mm, bill_length_mm, color=sex)) +
+ggplot(data, 
+       aes(flipper_length_mm, bill_length_mm, color=sex)) +
     geom_point()
 
 ```
 
 
 ## Simulate
+Simulate from the normal and uniform distributions.
 ```{r}
-
+rnorm(n = 10, mean = 100, sd = 20)
+runif(n = 5, min = 0, max = 1)
 
 ```
 
+Bootstrapping
+I think this was described as a more accurate way to accept or reject the null hypothesis.
+```{r}
+library(boot)
+set.seed(23) # for replicability
+
+our_function <- function(formula, data, indices) {
+  fit <- lm(formula, data[indices,]) # linear regression
+  
+  return( summary(fit)$r.square)
+}
+
+# bootstrap 10,000 times
+# see how much body mass and bill depth explains bill length?
+boot_obj <- boot(data = data, statistic = our_function, R=10000, formula = bill_length_mm ~ body_mass_g + bill_depth_mm)
+
+boot_obj
+plot(boot_obj)
+boot.ci(boot_obj, type="bca")
+
+```
+Note that our_function takes in a formula as an argument.
+
+adapted from: https://www.datacamp.com/doc/r/bootstrapping
