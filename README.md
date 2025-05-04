@@ -1,2 +1,2 @@
 # Rcode
-Repository for practicing and referencing code in R.
+Repository for notes on how to use R.
